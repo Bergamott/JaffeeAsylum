@@ -1,0 +1,53 @@
+images {
+  image: "/main/assets/images/tall_walk1.png"
+}
+images {
+  image: "/main/assets/images/tall_walk2.png"
+}
+images {
+  image: "/main/assets/images/tall_walk3.png"
+}
+images {
+  image: "/main/assets/images/tall_walk_pixel1.png"
+}
+images {
+  image: "/main/assets/images/tall_walk_pixel2.png"
+}
+images {
+  image: "/main/assets/images/tall_walk_pixel3.png"
+}
+animations {
+  id: "tall_walk"
+  images {
+    image: "/main/assets/images/tall_walk1.png"
+  }
+  images {
+    image: "/main/assets/images/tall_walk2.png"
+  }
+  images {
+    image: "/main/assets/images/tall_walk3.png"
+  }
+  images {
+    image: "/main/assets/images/tall_walk2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 9
+}
+animations {
+  id: "tall_walk_pixel"
+  images {
+    image: "/main/assets/images/tall_walk_pixel1.png"
+  }
+  images {
+    image: "/main/assets/images/tall_walk_pixel2.png"
+  }
+  images {
+    image: "/main/assets/images/tall_walk_pixel3.png"
+  }
+  images {
+    image: "/main/assets/images/tall_walk_pixel2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 9
+}
+extrude_borders: 2

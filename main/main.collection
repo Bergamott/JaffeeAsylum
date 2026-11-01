@@ -1,26 +1,20 @@
 name: "main"
 scale_along_z: 0
 embedded_instances {
-  id: "tv_frame"
-  data: "embedded_components {\n"
-  "  id: \"sprite\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"tv_frame\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "textures {\\n"
-  "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/main/assets/decorations.atlas\\\"\\n"
-  "}\\n"
+  id: "game_area"
+  children: "game_background"
+  children: "tv_frame"
+  data: "components {\n"
+  "  id: \"game_area\"\n"
+  "  component: \"/main/game_area.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"walker_factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/walker.go\\\"\\n"
   "\"\n"
-  "  position {\n"
-  "    x: 268.5\n"
-  "    y: 184.5\n"
-  "  }\n"
   "}\n"
   ""
-  position {
-    z: 1.0
-  }
 }
 embedded_instances {
   id: "game_background"
@@ -29,6 +23,10 @@ embedded_instances {
   "  type: \"sprite\"\n"
   "  data: \"default_animation: \\\"lined_background\\\"\\n"
   "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 460.0\\n"
+  "  y: 100.0\\n"
+  "}\\n"
   "textures {\\n"
   "  sampler: \\\"texture_sampler\\\"\\n"
   "  texture: \\\"/main/assets/decorations.atlas\\\"\\n"
@@ -45,5 +43,31 @@ embedded_instances {
   ""
   position {
     z: -0.5
+  }
+}
+embedded_instances {
+  id: "tv_frame"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"tv_frame\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 535.0\\n"
+  "  y: 369.0\\n"
+  "}\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/main/assets/decorations.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 268.5\n"
+  "    y: 184.5\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    z: 1.0
   }
 }
