@@ -4,4 +4,7 @@ images {
 images {
   image: "/main/assets/images/gray_background.png"
 }
+images {
+  image: "/main/assets/images/lined_background.png"
+}
 extrude_borders: 2
