@@ -16,6 +16,24 @@ images {
 images {
   image: "/main/assets/images/woman_walk3.png"
 }
+images {
+  image: "/main/assets/images/short_walk1.png"
+}
+images {
+  image: "/main/assets/images/short_walk2.png"
+}
+images {
+  image: "/main/assets/images/short_walk3.png"
+}
+images {
+  image: "/main/assets/images/dude_walk1.png"
+}
+images {
+  image: "/main/assets/images/dude_walk2.png"
+}
+images {
+  image: "/main/assets/images/dude_walk3.png"
+}
 animations {
   id: "tall_walk"
   images {
@@ -46,6 +64,40 @@ animations {
   }
   images {
     image: "/main/assets/images/woman_walk2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 9
+}
+animations {
+  id: "short_walk"
+  images {
+    image: "/main/assets/images/short_walk1.png"
+  }
+  images {
+    image: "/main/assets/images/short_walk2.png"
+  }
+  images {
+    image: "/main/assets/images/short_walk3.png"
+  }
+  images {
+    image: "/main/assets/images/short_walk2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 9
+}
+animations {
+  id: "dude_walk"
+  images {
+    image: "/main/assets/images/dude_walk1.png"
+  }
+  images {
+    image: "/main/assets/images/dude_walk2.png"
+  }
+  images {
+    image: "/main/assets/images/dude_walk3.png"
+  }
+  images {
+    image: "/main/assets/images/dude_walk2.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
   fps: 9

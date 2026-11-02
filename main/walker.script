@@ -1,11 +1,10 @@
 WALK_SPEED = 40.0
 VANISH_POINT = 530.0
+WALK_ANIMATIONS = {hash("tall_walk"), hash("woman_walk"), hash("short_walk"), hash("dude_walk")}
 
 function init(self)
 	self.pos = go.get_position()
-	if math.random() < 0.5 then
-		sprite.play_flipbook("#sprite", hash("woman_walk"))
-	end
+	sprite.play_flipbook("#sprite", WALK_ANIMATIONS[math.random(4)])
 end
 
 function final(self)

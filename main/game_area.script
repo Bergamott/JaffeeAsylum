@@ -3,6 +3,8 @@ WALKER_START_X = -20.0
 WALKER_MIN_Y = 70
 WALKER_MAX_Y = 315
 function init(self)
+	local seed = os.time()
+	math.randomseed(seed)
 	self.release_timer = RELEASE_INTERVAL
 end
 
