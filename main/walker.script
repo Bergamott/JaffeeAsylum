@@ -4,7 +4,7 @@ VANISH_POINT = 530.0
 function init(self)
 	self.pos = go.get_position()
 	if math.random() < 0.5 then
-		sprite.play_flipbook("#sprite", hash("tall_walk_pixel"))
+		sprite.play_flipbook("#sprite", hash("woman_walk"))
 	end
 end
 
