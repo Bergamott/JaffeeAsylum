@@ -1,7 +1,7 @@
 RELEASE_INTERVAL = 1.5
 WALKER_START_X = -20.0
-WALKER_MIN_Y = 70
-WALKER_MAX_Y = 315
+WALKER_MIN_Y = 80
+WALKER_MAX_Y = 320
 function init(self)
 	local seed = os.time()
 	math.randomseed(seed)
@@ -18,7 +18,9 @@ function update(self, dt)
 	self.release_timer = self.release_timer - dt
 	if self.release_timer <= 0 then
 		local y = math.random(WALKER_MIN_Y,WALKER_MAX_Y)
-		local id = factory.create("#walker_factory", vmath.vector3(WALKER_START_X, y, 0.0), nil)
+		local z = 0.3*(WALKER_MAX_Y - y)/(WALKER_MAX_Y-WALKER_MIN_Y)
+		local id = factory.create("#walker_factory", vmath.vector3(WALKER_START_X, y, z), nil,
+		{type = math.random(8)})
 		self.release_timer = self.release_timer + RELEASE_INTERVAL
 	end
 end

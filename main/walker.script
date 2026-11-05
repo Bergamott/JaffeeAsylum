@@ -1,10 +1,22 @@
+go.property("type", 1)
+
 WALK_SPEED = 40.0
 VANISH_POINT = 530.0
-WALK_ANIMATIONS = {hash("tall_walk"), hash("woman_walk"), hash("short_walk"), hash("dude_walk")}
+WALK_ANIMATIONS = {hash("tall_walk"), hash("woman_walk"),
+hash("short_walk"), hash("dude_walk"),
+hash("tall_walk_white"), hash("woman_walk_white"),
+hash("short_walk_white"), hash("dude_walk_white")}
+
+function skewed_vector(angle)
+	local ang = angle + 50.0*(math.random()-0.5)
+	local x = math.cos(math.rad(ang))
+	local y = math.sin(math.rad(ang))
+	return vmath.vector3(x, y, 0)
+end
 
 function init(self)
 	self.pos = go.get_position()
-	sprite.play_flipbook("#sprite", WALK_ANIMATIONS[math.random(4)])
+	sprite.play_flipbook("#sprite", WALK_ANIMATIONS[self.type])
 end
 
 function final(self)
@@ -37,9 +49,25 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
+	if message_id == hash("collision_response") then
+		local burst_pos = vmath.vector3(self.pos.x, self.pos.y+10.0, -0.5)
+		local id = factory.create("game_area#burst_factory", self.pos, nil)
+		-- Hat
+		local hat_pos = vmath.vector3(self.pos.x, self.pos.y+25.0, self.pos.z)
+		id = factory.create("game_area#debris_factory", hat_pos, nil,
+			{rotation = 300.0*(math.random()-0.5), dir = skewed_vector(90.0), 
+			type = self.type + 1})
+		-- Legs
+		local back_leg_pos = vmath.vector3(self.pos.x-10.0, self.pos.y-25.0, self.pos.z)
+		id = factory.create("game_area#debris_factory", back_leg_pos, nil,
+			{rotation = 300.0*(math.random()-0.5), dir = skewed_vector(240.0), 
+			type = 1})
+		local front_leg_pos = vmath.vector3(self.pos.x+10.0, self.pos.y-25.0, self.pos.z)
+		id = factory.create("game_area#debris_factory", front_leg_pos, nil,
+			{rotation = 300.0*(math.random()-0.5), dir = skewed_vector(300.0), 
+			type = 1})
+		go.delete()
+	end
 end
 
 function on_input(self, action_id, action)

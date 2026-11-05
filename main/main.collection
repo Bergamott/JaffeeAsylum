@@ -1,7 +1,16 @@
 name: "main"
+instances {
+  id: "cop"
+  prototype: "/main/cop.go"
+  position {
+    x: 400.0
+    y: 200.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "game_area"
+  children: "background_color"
   children: "game_background"
   children: "tv_frame"
   data: "components {\n"
@@ -14,36 +23,24 @@ embedded_instances {
   "  data: \"prototype: \\\"/main/walker.go\\\"\\n"
   "\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"burst_factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/burst.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"debris_factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/main/debris.go\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
 embedded_instances {
   id: "game_background"
-  data: "embedded_components {\n"
-  "  id: \"sprite\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"lined_background\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "size {\\n"
-  "  x: 460.0\\n"
-  "  y: 100.0\\n"
-  "}\\n"
-  "textures {\\n"
-  "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/main/assets/decorations.atlas\\\"\\n"
-  "}\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: 271.0\n"
-  "    y: 184.5\n"
-  "  }\n"
-  "  scale {\n"
-  "    y: 3.5\n"
-  "  }\n"
-  "}\n"
-  ""
-  position {
-    z: -0.5
-  }
+  children: "cop"
+  data: ""
 }
 embedded_instances {
   id: "tv_frame"
@@ -69,5 +66,34 @@ embedded_instances {
   ""
   position {
     z: 1.0
+  }
+}
+embedded_instances {
+  id: "background_color"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"lined_background\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "size {\\n"
+  "  x: 460.0\\n"
+  "  y: 100.0\\n"
+  "}\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/main/assets/decorations.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 271.0\n"
+  "    y: 184.5\n"
+  "  }\n"
+  "  scale {\n"
+  "    y: 3.5\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    z: -0.8
   }
 }

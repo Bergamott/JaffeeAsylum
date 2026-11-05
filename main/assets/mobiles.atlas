@@ -34,6 +34,120 @@ images {
 images {
   image: "/main/assets/images/dude_walk3.png"
 }
+images {
+  image: "/main/assets/images/body_left1.png"
+}
+images {
+  image: "/main/assets/images/body_left2.png"
+}
+images {
+  image: "/main/assets/images/body_left3.png"
+}
+images {
+  image: "/main/assets/images/body_left4.png"
+}
+images {
+  image: "/main/assets/images/body_right1.png"
+}
+images {
+  image: "/main/assets/images/body_right2.png"
+}
+images {
+  image: "/main/assets/images/body_right3.png"
+}
+images {
+  image: "/main/assets/images/body_right4.png"
+}
+images {
+  image: "/main/assets/images/legs_run_left1.png"
+}
+images {
+  image: "/main/assets/images/legs_run_left2.png"
+}
+images {
+  image: "/main/assets/images/legs_run_left3.png"
+}
+images {
+  image: "/main/assets/images/legs_run_right1.png"
+}
+images {
+  image: "/main/assets/images/legs_run_right2.png"
+}
+images {
+  image: "/main/assets/images/legs_run_right3.png"
+}
+images {
+  image: "/main/assets/images/legs_stand_left.png"
+}
+images {
+  image: "/main/assets/images/legs_stand_right.png"
+}
+images {
+  image: "/main/assets/images/burst.png"
+}
+images {
+  image: "/main/assets/images/foot.png"
+}
+images {
+  image: "/main/assets/images/dude_hat_black.png"
+}
+images {
+  image: "/main/assets/images/tall_hat_black.png"
+}
+images {
+  image: "/main/assets/images/woman_hat_black.png"
+}
+images {
+  image: "/main/assets/images/short_hat_black.png"
+}
+images {
+  image: "/main/assets/images/dude_hat_white.png"
+}
+images {
+  image: "/main/assets/images/dude_walk_white1.png"
+}
+images {
+  image: "/main/assets/images/dude_walk_white2.png"
+}
+images {
+  image: "/main/assets/images/dude_walk_white3.png"
+}
+images {
+  image: "/main/assets/images/short_hat_white.png"
+}
+images {
+  image: "/main/assets/images/short_walk_white1.png"
+}
+images {
+  image: "/main/assets/images/short_walk_white2.png"
+}
+images {
+  image: "/main/assets/images/short_walk_white3.png"
+}
+images {
+  image: "/main/assets/images/tall_hat_white.png"
+}
+images {
+  image: "/main/assets/images/tall_walk_white1.png"
+}
+images {
+  image: "/main/assets/images/tall_walk_white2.png"
+}
+images {
+  image: "/main/assets/images/tall_walk_white3.png"
+}
+images {
+  image: "/main/assets/images/woman_hat_white.png"
+}
+images {
+  image: "/main/assets/images/woman_walk_white1.png"
+}
+images {
+  image: "/main/assets/images/woman_walk_white2.png"
+}
+images {
+  image: "/main/assets/images/woman_walk_white3.png"
+}
 animations {
   id: "tall_walk"
   images {
@@ -98,6 +212,152 @@ animations {
   }
   images {
     image: "/main/assets/images/dude_walk2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 9
+}
+animations {
+  id: "hit_left"
+  images {
+    image: "/main/assets/images/body_left2.png"
+  }
+  images {
+    image: "/main/assets/images/body_left3.png"
+  }
+  images {
+    image: "/main/assets/images/body_left4.png"
+  }
+  images {
+    image: "/main/assets/images/body_left3.png"
+  }
+  images {
+    image: "/main/assets/images/body_left2.png"
+  }
+  images {
+    image: "/main/assets/images/body_left1.png"
+  }
+  fps: 16
+}
+animations {
+  id: "hit_right"
+  images {
+    image: "/main/assets/images/body_right2.png"
+  }
+  images {
+    image: "/main/assets/images/body_right3.png"
+  }
+  images {
+    image: "/main/assets/images/body_right4.png"
+  }
+  images {
+    image: "/main/assets/images/body_right3.png"
+  }
+  images {
+    image: "/main/assets/images/body_right2.png"
+  }
+  images {
+    image: "/main/assets/images/body_right1.png"
+  }
+  fps: 16
+}
+animations {
+  id: "legs_left"
+  images {
+    image: "/main/assets/images/legs_run_left1.png"
+  }
+  images {
+    image: "/main/assets/images/legs_run_left2.png"
+  }
+  images {
+    image: "/main/assets/images/legs_run_left3.png"
+  }
+  images {
+    image: "/main/assets/images/legs_run_left2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+}
+animations {
+  id: "legs_right"
+  images {
+    image: "/main/assets/images/legs_run_right1.png"
+  }
+  images {
+    image: "/main/assets/images/legs_run_right2.png"
+  }
+  images {
+    image: "/main/assets/images/legs_run_right3.png"
+  }
+  images {
+    image: "/main/assets/images/legs_run_right2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+}
+animations {
+  id: "tall_walk_white"
+  images {
+    image: "/main/assets/images/tall_walk_white1.png"
+  }
+  images {
+    image: "/main/assets/images/tall_walk_white2.png"
+  }
+  images {
+    image: "/main/assets/images/tall_walk_white3.png"
+  }
+  images {
+    image: "/main/assets/images/tall_walk_white2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 9
+}
+animations {
+  id: "woman_walk_white"
+  images {
+    image: "/main/assets/images/woman_walk_white1.png"
+  }
+  images {
+    image: "/main/assets/images/woman_walk_white2.png"
+  }
+  images {
+    image: "/main/assets/images/woman_walk_white3.png"
+  }
+  images {
+    image: "/main/assets/images/woman_walk_white2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 9
+}
+animations {
+  id: "dude_walk_white"
+  images {
+    image: "/main/assets/images/dude_walk_white1.png"
+  }
+  images {
+    image: "/main/assets/images/dude_walk_white2.png"
+  }
+  images {
+    image: "/main/assets/images/dude_walk_white3.png"
+  }
+  images {
+    image: "/main/assets/images/dude_walk_white2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 9
+}
+animations {
+  id: "short_walk_white"
+  images {
+    image: "/main/assets/images/short_walk_white1.png"
+  }
+  images {
+    image: "/main/assets/images/short_walk_white2.png"
+  }
+  images {
+    image: "/main/assets/images/short_walk_white3.png"
+  }
+  images {
+    image: "/main/assets/images/short_walk_white2.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
   fps: 9
