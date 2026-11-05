@@ -419,7 +419,7 @@ animations {
     image: "/main/assets/images/tall_rise.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 3
+  fps: 4
 }
 animations {
   id: "tall_idle_white"
@@ -430,7 +430,7 @@ animations {
     image: "/main/assets/images/tall_rise_white.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 3
+  fps: 4
 }
 animations {
   id: "woman_idle"
@@ -441,7 +441,7 @@ animations {
     image: "/main/assets/images/woman_rise.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 3
+  fps: 4
 }
 animations {
   id: "woman_idle_white"
@@ -452,7 +452,7 @@ animations {
     image: "/main/assets/images/woman_rise_white.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 3
+  fps: 4
 }
 animations {
   id: "short_idle"
@@ -463,7 +463,7 @@ animations {
     image: "/main/assets/images/short_rise.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 3
+  fps: 4
 }
 animations {
   id: "short_idle_white"
@@ -474,7 +474,7 @@ animations {
     image: "/main/assets/images/short_rise_white.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 3
+  fps: 4
 }
 animations {
   id: "dude_idle"
@@ -485,7 +485,7 @@ animations {
     image: "/main/assets/images/dude_rise.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 3
+  fps: 4
 }
 animations {
   id: "dude_idle_white"
@@ -496,6 +496,6 @@ animations {
     image: "/main/assets/images/dude_rise_white.png"
   }
   playback: PLAYBACK_LOOP_FORWARD
-  fps: 3
+  fps: 4
 }
 extrude_borders: 2

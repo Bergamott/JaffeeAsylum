@@ -1,4 +1,5 @@
 go.property("type", 1)
+go.property("delay", 5.0)
 
 WALK_SPEED = 40.0
 VANISH_POINT = 750.0
@@ -6,6 +7,16 @@ WALK_ANIMATIONS = {hash("tall_walk"), hash("woman_walk"),
 hash("short_walk"), hash("dude_walk"),
 hash("tall_walk_white"), hash("woman_walk_white"),
 hash("short_walk_white"), hash("dude_walk_white")}
+IDLE_ANIMATIONS = {hash("tall_idle"), hash("woman_idle"),
+hash("short_idle"), hash("dude_idle"),
+hash("tall_idle_white"), hash("woman_idle_white"),
+hash("short_idle_white"), hash("dude_idle_white")}
+STAND_ANIMATIONS = {hash("tall_stand"), hash("woman_stand"),
+hash("short_stand"), hash("dude_stand"),
+hash("tall_stand_white"), hash("woman_stand_white"),
+hash("short_stand_white"), hash("dude_stand_white")}
+
+IDLE_TIME = 2.0
 
 function skewed_vector(angle)
 	local ang = angle + 50.0*(math.random()-0.5)
@@ -16,7 +27,8 @@ end
 
 function init(self)
 	self.pos = go.get_position()
-	sprite.play_flipbook("#sprite", WALK_ANIMATIONS[self.type])
+	self.idling = false
+	sprite.play_flipbook("#sprite", STAND_ANIMATIONS[self.type])
 end
 
 function final(self)
@@ -26,10 +38,20 @@ function final(self)
 end
 
 function update(self, dt)
-	self.pos.x = self.pos.x + dt * WALK_SPEED
-	go.set_position(self.pos)
-	if self.pos.x > VANISH_POINT then
-		go.delete()
+	if self.delay >= 0 then
+		self.delay = self.delay - dt
+		if self.delay < IDLE_TIME and not self.idling then
+			self.idling = true
+			sprite.play_flipbook("#sprite", IDLE_ANIMATIONS[self.type])
+		elseif self.delay <= 0 then
+			sprite.play_flipbook("#sprite", WALK_ANIMATIONS[self.type])
+		end
+	else
+		self.pos.x = self.pos.x + dt * WALK_SPEED
+		go.set_position(self.pos)
+		if self.pos.x > VANISH_POINT then
+			go.delete()
+		end
 	end
 end
 

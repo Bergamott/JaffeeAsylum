@@ -2,16 +2,43 @@ RELEASE_INTERVAL = 1.5
 WALKER_START_X = -20.0
 WALKER_MIN_Y = 80
 WALKER_MAX_Y = 320
-function init(self)
-	local seed = os.time()
-	math.randomseed(seed)
-	self.release_timer = RELEASE_INTERVAL
+CROWD_SIZES = {14,8,10,12,14}
+X_SPACING = 30.0
+Y_SPACING = 130.0
+
+function setup_crowd(self)
+	local crowd_size = CROWD_SIZES[math.min(self.level, #CROWD_SIZES)]
+	local start_x = 260.0
+	local delay = 2.5
+	for i=1,crowd_size do
+		local y = (i %2) * Y_SPACING + 95.0
+		if (i % 4) == 3 or (i % 4) == 0 then
+			y = y + 0.5*Y_SPACING
+		end
+		local z = 0.3*(WALKER_MAX_Y - y)/(WALKER_MAX_Y-WALKER_MIN_Y)
+		local id = factory.create("#walker_factory", vmath.vector3(start_x, y, z), nil,
+		{type = math.random(8), delay = delay})
+		go.set_parent(id, "/game_background", false)
+		if (i % 2) == 0 then
+			start_x = start_x - X_SPACING
+			delay = delay + 3.0
+		end
+	end
 end
 
 function final(self)
 	-- Add finalization code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
+end
+
+
+function init(self)
+	local seed = os.time()
+	math.randomseed(seed)
+	self.release_timer = RELEASE_INTERVAL
+	self.level = 1
+	setup_crowd(self)
 end
 
 function update(self, dt)
