@@ -148,6 +148,54 @@ images {
 images {
   image: "/main/assets/images/woman_walk_white3.png"
 }
+images {
+  image: "/main/assets/images/dude_rise.png"
+}
+images {
+  image: "/main/assets/images/dude_rise_white.png"
+}
+images {
+  image: "/main/assets/images/dude_stand.png"
+}
+images {
+  image: "/main/assets/images/dude_stand_white.png"
+}
+images {
+  image: "/main/assets/images/short_rise.png"
+}
+images {
+  image: "/main/assets/images/short_rise_white.png"
+}
+images {
+  image: "/main/assets/images/short_stand.png"
+}
+images {
+  image: "/main/assets/images/short_stand_white.png"
+}
+images {
+  image: "/main/assets/images/tall_rise.png"
+}
+images {
+  image: "/main/assets/images/tall_rise_white.png"
+}
+images {
+  image: "/main/assets/images/tall_stand.png"
+}
+images {
+  image: "/main/assets/images/tall_stand_white.png"
+}
+images {
+  image: "/main/assets/images/woman_rise.png"
+}
+images {
+  image: "/main/assets/images/woman_rise_white.png"
+}
+images {
+  image: "/main/assets/images/woman_stand.png"
+}
+images {
+  image: "/main/assets/images/woman_stand_white.png"
+}
 animations {
   id: "tall_walk"
   images {
@@ -361,5 +409,93 @@ animations {
   }
   playback: PLAYBACK_LOOP_FORWARD
   fps: 9
+}
+animations {
+  id: "tall_idle"
+  images {
+    image: "/main/assets/images/tall_stand.png"
+  }
+  images {
+    image: "/main/assets/images/tall_rise.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 3
+}
+animations {
+  id: "tall_idle_white"
+  images {
+    image: "/main/assets/images/tall_stand_white.png"
+  }
+  images {
+    image: "/main/assets/images/tall_rise_white.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 3
+}
+animations {
+  id: "woman_idle"
+  images {
+    image: "/main/assets/images/woman_stand.png"
+  }
+  images {
+    image: "/main/assets/images/woman_rise.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 3
+}
+animations {
+  id: "woman_idle_white"
+  images {
+    image: "/main/assets/images/woman_stand_white.png"
+  }
+  images {
+    image: "/main/assets/images/woman_rise_white.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 3
+}
+animations {
+  id: "short_idle"
+  images {
+    image: "/main/assets/images/short_stand.png"
+  }
+  images {
+    image: "/main/assets/images/short_rise.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 3
+}
+animations {
+  id: "short_idle_white"
+  images {
+    image: "/main/assets/images/short_stand_white.png"
+  }
+  images {
+    image: "/main/assets/images/short_rise_white.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 3
+}
+animations {
+  id: "dude_idle"
+  images {
+    image: "/main/assets/images/dude_stand.png"
+  }
+  images {
+    image: "/main/assets/images/dude_rise.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 3
+}
+animations {
+  id: "dude_idle_white"
+  images {
+    image: "/main/assets/images/dude_stand_white.png"
+  }
+  images {
+    image: "/main/assets/images/dude_rise_white.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 3
 }
 extrude_borders: 2
