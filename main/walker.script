@@ -1,7 +1,7 @@
 go.property("type", 1)
 
 WALK_SPEED = 40.0
-VANISH_POINT = 530.0
+VANISH_POINT = 750.0
 WALK_ANIMATIONS = {hash("tall_walk"), hash("woman_walk"),
 hash("short_walk"), hash("dude_walk"),
 hash("tall_walk_white"), hash("woman_walk_white"),
@@ -52,20 +52,24 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("collision_response") then
 		local burst_pos = vmath.vector3(self.pos.x, self.pos.y+10.0, -0.5)
 		local id = factory.create("game_area#burst_factory", self.pos, nil)
+		go.set_parent(id, "/game_background", false)
 		-- Hat
 		local hat_pos = vmath.vector3(self.pos.x, self.pos.y+25.0, self.pos.z)
 		id = factory.create("game_area#debris_factory", hat_pos, nil,
 			{rotation = 300.0*(math.random()-0.5), dir = skewed_vector(90.0), 
 			type = self.type + 1})
+		go.set_parent(id, "/game_background", false)
 		-- Legs
 		local back_leg_pos = vmath.vector3(self.pos.x-10.0, self.pos.y-25.0, self.pos.z)
 		id = factory.create("game_area#debris_factory", back_leg_pos, nil,
 			{rotation = 300.0*(math.random()-0.5), dir = skewed_vector(240.0), 
 			type = 1})
+		go.set_parent(id, "/game_background", false)
 		local front_leg_pos = vmath.vector3(self.pos.x+10.0, self.pos.y-25.0, self.pos.z)
 		id = factory.create("game_area#debris_factory", front_leg_pos, nil,
 			{rotation = 300.0*(math.random()-0.5), dir = skewed_vector(300.0), 
 			type = 1})
+		go.set_parent(id, "/game_background", false)
 		go.delete()
 	end
 end

@@ -21,6 +21,7 @@ function update(self, dt)
 		local z = 0.3*(WALKER_MAX_Y - y)/(WALKER_MAX_Y-WALKER_MIN_Y)
 		local id = factory.create("#walker_factory", vmath.vector3(WALKER_START_X, y, z), nil,
 		{type = math.random(8)})
+		go.set_parent(id, "/game_background", false)
 		self.release_timer = self.release_timer + RELEASE_INTERVAL
 	end
 end
