@@ -37,6 +37,7 @@ function setup_crowd(self)
 	self.release_timer = delay
 	self.people_gone = 0
 	self.black_hats_hit = 0
+	self.active = true
 end
 
 function final(self)
@@ -56,23 +57,26 @@ function init(self)
 	self.black_hats = 0
 	self.black_hats_hit = 0
 	self.release_timer = 0
-	setup_crowd(self)
+	self.active = false
+	--setup_crowd(self)
 end
 
 function update(self, dt)
-	self.release_timer = self.release_timer - dt
-	if self.release_timer <= 0 and self.people_spawned < self.crowd_size then
-		local y = math.random(WALKER_MIN_Y,WALKER_MAX_Y)
-		local z = 0.3*(WALKER_MAX_Y - y)/(WALKER_MAX_Y-WALKER_MIN_Y)
-		local walker_type = math.random(8)
-		if walker_type < 4 then
-			self.black_hats = self.black_hats + 1
+	if self.active then
+		self.release_timer = self.release_timer - dt
+		if self.release_timer <= 0 and self.people_spawned < self.crowd_size then
+			local y = math.random(WALKER_MIN_Y,WALKER_MAX_Y)
+			local z = 0.3*(WALKER_MAX_Y - y)/(WALKER_MAX_Y-WALKER_MIN_Y)
+			local walker_type = math.random(8)
+			if walker_type < 4 then
+				self.black_hats = self.black_hats + 1
+			end
+			local id = factory.create("#walker_factory", vmath.vector3(WALKER_START_X, y, z), nil,
+				{type = walker_type})
+			go.set_parent(id, "/game_background", false)
+			self.release_timer = self.release_timer + RELEASE_INTERVAL
+			self.people_spawned = self.people_spawned + 1
 		end
-		local id = factory.create("#walker_factory", vmath.vector3(WALKER_START_X, y, z), nil,
-		{type = walker_type})
-		go.set_parent(id, "/game_background", false)
-		self.release_timer = self.release_timer + RELEASE_INTERVAL
-		self.people_spawned = self.people_spawned + 1
 	end
 end
 
