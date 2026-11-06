@@ -7,10 +7,10 @@ MAX_Y = 320.0
 MIN_X = 310.0
 MAX_X = 700.0
 NATURAL_X = 400.0
-function init(self)
-	self.pos = go.get_position()
+
+function setup(self)
+	self.pos = vmath.vector3(400.0, 200.0, 0)
 	self.hit_countdown = 0.0
-	msg.post(".", "acquire_input_focus")    -- acquiring input focus
 	self.v_dir = 0
 	self.h_dir = 0
 	self.facing_left = true
@@ -19,6 +19,13 @@ function init(self)
 	msg.post("#left_baton", "disable")
 	msg.post("#right_baton", "disable")
 	self.baton_state = 0
+	self.active = true
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")    -- acquiring input focus
+	self.active = false
+	setup(self)
 end
 
 function final(self)
@@ -28,90 +35,92 @@ function final(self)
 end
 
 function update(self, dt)
-	self.hit_countdown = self.hit_countdown - dt
+	if self.active then
+		self.hit_countdown = self.hit_countdown - dt
 
-	local running = false
-	local leg_animation = hash("legs_stand_left")
-	local body_animation = self.body_animation
-	if not self.facing_left then
-		leg_animation = hash("legs_stand_right")
-	end
-	if self.h_dir == 3 then
-		self.pos.x = self.pos.x - RUNNING_SPEED * dt;
-		self.facing_left = true
-		running = true
-		leg_animation = hash("legs_left")
-		if self.hit_countdown <= 0 then
-			body_animation = hash("body_left1")
+		local running = false
+		local leg_animation = hash("legs_stand_left")
+		local body_animation = self.body_animation
+		if not self.facing_left then
+			leg_animation = hash("legs_stand_right")
 		end
-	elseif self.h_dir == 4 then
-		self.pos.x = self.pos.x + RUNNING_SPEED * dt;
-		self.facing_left = false
-		running = true
-		leg_animation = hash("legs_right")
-		if self.hit_countdown <= 0 then
-			body_animation = hash("body_right1")
-		end
-	end
-	self.h_dir = 0
-	if self.v_dir == 1 then
-		self.pos.y = self.pos.y + RUNNING_SPEED * dt;
-		running = true
-		if self.facing_left then
+		if self.h_dir == 3 then
+			self.pos.x = self.pos.x - RUNNING_SPEED * dt;
+			self.facing_left = true
+			running = true
 			leg_animation = hash("legs_left")
-		else
+			if self.hit_countdown <= 0 then
+				body_animation = hash("body_left1")
+			end
+		elseif self.h_dir == 4 then
+			self.pos.x = self.pos.x + RUNNING_SPEED * dt;
+			self.facing_left = false
+			running = true
 			leg_animation = hash("legs_right")
+			if self.hit_countdown <= 0 then
+				body_animation = hash("body_right1")
+			end
 		end
-	elseif self.v_dir == 2 then
-		self.pos.y = self.pos.y - RUNNING_SPEED * dt;
-		running = true
-		if self.facing_left then
-			leg_animation = hash("legs_left")
-		else
-			leg_animation = hash("legs_right")
+		self.h_dir = 0
+		if self.v_dir == 1 then
+			self.pos.y = self.pos.y + RUNNING_SPEED * dt;
+			running = true
+			if self.facing_left then
+				leg_animation = hash("legs_left")
+			else
+				leg_animation = hash("legs_right")
+			end
+		elseif self.v_dir == 2 then
+			self.pos.y = self.pos.y - RUNNING_SPEED * dt;
+			running = true
+			if self.facing_left then
+				leg_animation = hash("legs_left")
+			else
+				leg_animation = hash("legs_right")
+			end
 		end
-	end
-	self.v_dir = 0
-	if self.pos.y < MIN_Y then
-		self.pos.y = MIN_Y
-	elseif self.pos.y > MAX_Y then
-		self.pos.y = MAX_Y
-	end
-	if self.pos.x < MIN_X then
-		self.pos.x = MIN_X
-	elseif self.pos.x > MAX_X then
-		self.pos.x = MAX_X
-	end
-	self.pos.z = 0.3*(MAX_Y - self.pos.y)/(MAX_Y-MIN_Y)
-	go.set_position(self.pos)
-	if self.leg_animation ~= leg_animation then
-		self.leg_animation = leg_animation
-		sprite.play_flipbook("#legs", leg_animation)
-	end
-	if self.body_animation ~= body_animation then
-		self.body_animation = body_animation
-		sprite.play_flipbook("#body", body_animation)
-	end
-	
-	if self.baton_state == 1 then
-		if self.hit_countdown < HIT_START then
-			self.baton_state = 2
-			msg.post("#left_baton", "enable")
+		self.v_dir = 0
+		if self.pos.y < MIN_Y then
+			self.pos.y = MIN_Y
+		elseif self.pos.y > MAX_Y then
+			self.pos.y = MAX_Y
 		end
-	elseif self.baton_state == 2 then
-		if self.hit_countdown < HIT_END then
-			self.baton_state = 0
-			msg.post("#left_baton", "disable")
+		if self.pos.x < MIN_X then
+			self.pos.x = MIN_X
+		elseif self.pos.x > MAX_X then
+			self.pos.x = MAX_X
 		end
-	elseif self.baton_state == 3 then
-		if self.hit_countdown < HIT_START then
-			self.baton_state = 4
-			msg.post("#right_baton", "enable")
+		self.pos.z = 0.3*(MAX_Y - self.pos.y)/(MAX_Y-MIN_Y)
+		go.set_position(self.pos)
+		if self.leg_animation ~= leg_animation then
+			self.leg_animation = leg_animation
+			sprite.play_flipbook("#legs", leg_animation)
 		end
-	elseif self.baton_state == 4 then
-		if self.hit_countdown < HIT_END then
-			self.baton_state = 0
-			msg.post("#right_baton", "disable")
+		if self.body_animation ~= body_animation then
+			self.body_animation = body_animation
+			sprite.play_flipbook("#body", body_animation)
+		end
+
+		if self.baton_state == 1 then
+			if self.hit_countdown < HIT_START then
+				self.baton_state = 2
+				msg.post("#left_baton", "enable")
+			end
+		elseif self.baton_state == 2 then
+			if self.hit_countdown < HIT_END then
+				self.baton_state = 0
+				msg.post("#left_baton", "disable")
+			end
+		elseif self.baton_state == 3 then
+			if self.hit_countdown < HIT_START then
+				self.baton_state = 4
+				msg.post("#right_baton", "enable")
+			end
+		elseif self.baton_state == 4 then
+			if self.hit_countdown < HIT_END then
+				self.baton_state = 0
+				msg.post("#right_baton", "disable")
+			end
 		end
 	end
 	-- Scroll screen

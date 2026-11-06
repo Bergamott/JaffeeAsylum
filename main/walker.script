@@ -1,5 +1,5 @@
 go.property("type", 1)
-go.property("delay", 5.0)
+go.property("delay", 0.2)
 
 WALK_SPEED = 40.0
 VANISH_POINT = 750.0
@@ -50,6 +50,7 @@ function update(self, dt)
 		self.pos.x = self.pos.x + dt * WALK_SPEED
 		go.set_position(self.pos)
 		if self.pos.x > VANISH_POINT then
+			msg.post("game_area#game_area","exited")
 			go.delete()
 		end
 	end
@@ -92,6 +93,11 @@ function on_message(self, message_id, message, sender)
 			{rotation = 300.0*(math.random()-0.5), dir = skewed_vector(300.0), 
 			type = 1})
 		go.set_parent(id, "/game_background", false)
+		if self.type <= 4 then
+			msg.post("game_area#game_area","black_hit")
+		else
+			msg.post("game_area#game_area","white_hit")
+		end
 		go.delete()
 	end
 end
