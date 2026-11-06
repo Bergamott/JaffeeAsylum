@@ -5,12 +5,14 @@ WALKER_MAX_Y = 320
 CROWD_SIZES = {14,8,10,12,14}
 X_SPACING = 30.0
 Y_SPACING = 130.0
+DELAY_INTERVAL = 1.0 -- Time between starts of initial crowd
 
 function setup_crowd(self)
-	local crowd_size = CROWD_SIZES[math.min(self.level, #CROWD_SIZES)]
+	self.crowd_size = CROWD_SIZES[math.min(self.level, #CROWD_SIZES)]
 	local start_x = 260.0
 	local delay = 2.5
-	for i=1,crowd_size do
+	self.people_spawned = 0
+	for i=1,math.min(self.crowd_size, 14) do
 		local y = (i %2) * Y_SPACING + 95.0
 		if (i % 4) == 3 or (i % 4) == 0 then
 			y = y + 0.5*Y_SPACING
@@ -21,9 +23,12 @@ function setup_crowd(self)
 		go.set_parent(id, "/game_background", false)
 		if (i % 2) == 0 then
 			start_x = start_x - X_SPACING
-			delay = delay + 3.0
+			--delay = delay + 3.0
 		end
+		delay = delay + DELAY_INTERVAL
+		self.people_spawned = self.people_spawned + 1
 	end
+	self.release_timer = delay
 end
 
 function final(self)
@@ -36,20 +41,23 @@ end
 function init(self)
 	local seed = os.time()
 	math.randomseed(seed)
-	self.release_timer = RELEASE_INTERVAL
 	self.level = 1
+	self.crowd_size = 8
+	self.people_spawned = 0
+	self.release_timer = 0
 	setup_crowd(self)
 end
 
 function update(self, dt)
 	self.release_timer = self.release_timer - dt
-	if self.release_timer <= 0 then
+	if self.release_timer <= 0 and self.people_spawned < self.crowd_size then
 		local y = math.random(WALKER_MIN_Y,WALKER_MAX_Y)
 		local z = 0.3*(WALKER_MAX_Y - y)/(WALKER_MAX_Y-WALKER_MIN_Y)
 		local id = factory.create("#walker_factory", vmath.vector3(WALKER_START_X, y, z), nil,
 		{type = math.random(8)})
 		go.set_parent(id, "/game_background", false)
 		self.release_timer = self.release_timer + RELEASE_INTERVAL
+		self.people_spawned = self.people_spawned + 1
 	end
 end
 
