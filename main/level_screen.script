@@ -1,0 +1,32 @@
+DIGIT_FRAMES = {hash("0"), hash("1"), hash("2"), hash("3"),
+	hash("4"), hash("5"), hash("6"), hash("7"), hash("8"), hash("9")}
+SHOW_TIME = 2.5
+function init(self)
+	msg.post(".", "disable")
+	self.timer = 0
+	self.active = false
+	self.level = 1
+end
+
+function update(self, dt)
+	if self.active then
+		self.timer = self.timer - dt
+		if self.timer <= 0 then
+			self.active = false
+			msg.post(".", "disable")
+
+		end
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("show") then
+		msg.post(".", "enable")
+		self.active = true
+		self.timer = SHOW_TIME
+		self.level = message.level
+		print(message.level)
+		sprite.play_flipbook("#digit1", DIGIT_FRAMES[math.floor(self.level / 10) % 10 + 1])
+		sprite.play_flipbook("#digit2", DIGIT_FRAMES[self.level % 10 + 1])
+		end
+end
