@@ -8,14 +8,16 @@ MIN_X = 310.0
 MAX_X = 700.0
 NATURAL_X = 400.0
 
-function setup(self)
+local function setup(self)
 	self.pos = vmath.vector3(400.0, 200.0, 0)
 	self.hit_countdown = 0.0
 	self.v_dir = 0
 	self.h_dir = 0
 	self.facing_left = true
 	self.leg_animation = hash("legs_stand_left")
+	sprite.play_flipbook("#legs", self.leg_animation)
 	self.body_animation = hash("body_left1")
+	sprite.play_flipbook("#body", self.body_animation)
 	msg.post("#left_baton", "disable")
 	msg.post("#right_baton", "disable")
 	self.baton_state = 0
@@ -25,7 +27,6 @@ end
 
 function init(self)
 	self.active = false
-	--setup(self)
 end
 
 function final(self)
@@ -104,22 +105,22 @@ function update(self, dt)
 		if self.baton_state == 1 then
 			if self.hit_countdown < HIT_START then
 				self.baton_state = 2
-				msg.post("#left_baton", "enable")
+				msg.post("/cop#left_baton", "enable")
 			end
 		elseif self.baton_state == 2 then
 			if self.hit_countdown < HIT_END then
 				self.baton_state = 0
-				msg.post("#left_baton", "disable")
+				msg.post("/cop#left_baton", "disable")
 			end
 		elseif self.baton_state == 3 then
 			if self.hit_countdown < HIT_START then
 				self.baton_state = 4
-				msg.post("#right_baton", "enable")
+				msg.post("/cop#right_baton", "enable")
 			end
 		elseif self.baton_state == 4 then
 			if self.hit_countdown < HIT_END then
 				self.baton_state = 0
-				msg.post("#right_baton", "disable")
+				msg.post("/cop#right_baton", "disable")
 			end
 		end
 		-- Scroll screen
@@ -151,6 +152,9 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("activate") then
 		setup(self)
+	elseif message_id == hash("deactivate") then
+		self.active = false
+		msg.post(".", "release_input_focus")
 	end
 end
 

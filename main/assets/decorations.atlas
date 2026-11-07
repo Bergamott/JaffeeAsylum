@@ -58,4 +58,25 @@ images {
 images {
   image: "/main/assets/images/level.png"
 }
+images {
+  image: "/main/assets/images/empty.png"
+}
+images {
+  image: "/main/assets/images/darker.png"
+}
+images {
+  image: "/main/assets/images/game_over.png"
+}
+images {
+  image: "/main/assets/images/limit.png"
+}
+images {
+  image: "/main/assets/images/slider_background.png"
+}
+images {
+  image: "/main/assets/images/slider_black.png"
+}
+images {
+  image: "/main/assets/images/target_met.png"
+}
 extrude_borders: 2

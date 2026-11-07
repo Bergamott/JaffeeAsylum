@@ -1,5 +1,8 @@
 function init(self)
 	msg.post(".", "acquire_input_focus")
+	-- Hide other screens
+	go.set_position(vmath.vector3(0,0,-2.0), "/level_screen")
+	go.set_position(vmath.vector3(0,0,-2.0), "/score_screen")
 end
 
 function final(self)
@@ -30,16 +33,18 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
+	if message_id == hash("show") then
+		go.set_position(vmath.vector3(0, 0, 0.5))
+		msg.post(".", "acquire_input_focus")
+	end
 end
 
 function on_input(self, action_id, action)
 	if action_id == hash("space") then
 		msg.post(".", "release_input_focus")
 		msg.post("/level_screen#level_screen","show", { level = 1 })
-		msg.post(".", "disable")
+		-- Hide self
+		go.set_position(vmath.vector3(0, 0, -2.0))
 	end
 end
 

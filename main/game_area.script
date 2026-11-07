@@ -7,7 +7,7 @@ Y_SPACING = 130.0
 WALKER_MAX_Y = WALKER_MIN_Y + Y_SPACING * 1.5
 DELAY_INTERVALS = {1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2}
 
-function setup_crowd(self)
+local function setup_crowd(self)
 	self.crowd_size = CROWD_SIZES[math.min(self.level, #CROWD_SIZES)]
 	local start_x = 260.0
 	local delay = 2.5
@@ -77,6 +77,13 @@ function update(self, dt)
 			go.set_parent(id, "/game_background", false)
 			self.release_timer = self.release_timer + RELEASE_INTERVAL
 			self.people_spawned = self.people_spawned + 1
+		end
+		if self.people_gone == self.crowd_size then
+			-- Level done
+			self.active = false
+			msg.post("/cop#cop","deactivate")
+			msg.post("/score_screen#score_screen","show", { level = self.level,
+				score = math.floor(100.0*self.black_hats_hit / self.black_hats) })
 		end
 	end
 end

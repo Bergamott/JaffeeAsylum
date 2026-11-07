@@ -94,9 +94,9 @@ function on_message(self, message_id, message, sender)
 			type = 1})
 		go.set_parent(id, "/game_background", false)
 		if self.type <= 4 then
-			msg.post("game_area#game_area","black_hit")
+			msg.post("game_area#game_area","hit_black")
 		else
-			msg.post("game_area#game_area","white_hit")
+			msg.post("game_area#game_area","hit_white")
 		end
 		go.delete()
 	end
