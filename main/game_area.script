@@ -38,6 +38,7 @@ function setup_crowd(self)
 	self.people_gone = 0
 	self.black_hats_hit = 0
 	self.active = true
+	msg.post("/cop#cop","activate")
 end
 
 function final(self)
@@ -103,6 +104,9 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("hit_black") then
 		self.black_hats_hit = self.black_hats_hit + 1
 		self.people_gone = self.people_gone + 1
+	elseif message_id == hash("setup") then
+		self.level = message.level
+		setup_crowd(self)
 	end
 end
 

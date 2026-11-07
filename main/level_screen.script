@@ -1,6 +1,6 @@
 DIGIT_FRAMES = {hash("0"), hash("1"), hash("2"), hash("3"),
 	hash("4"), hash("5"), hash("6"), hash("7"), hash("8"), hash("9")}
-SHOW_TIME = 2.5
+SHOW_TIME = 2.0
 function init(self)
 	msg.post(".", "disable")
 	self.timer = 0
@@ -13,8 +13,8 @@ function update(self, dt)
 		self.timer = self.timer - dt
 		if self.timer <= 0 then
 			self.active = false
+			msg.post("/game_area#game_area","setup", { level = self.level })
 			msg.post(".", "disable")
-
 		end
 	end
 end
