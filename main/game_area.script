@@ -115,11 +115,14 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("exited") then
 		self.people_gone = self.people_gone + 1
+		sound.play("/sounds#uhoh")
 	elseif message_id == hash("hit_white") then
 		self.people_gone = self.people_gone + 1
+		sound.play("/sounds#hit_white")
 	elseif message_id == hash("hit_black") then
 		self.black_hats_hit = self.black_hats_hit + 1
 		self.people_gone = self.people_gone + 1
+		sound.play("/sounds#hit_black")
 	elseif message_id == hash("setup") then
 		self.level = message.level
 		setup_crowd(self)

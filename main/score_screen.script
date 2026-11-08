@@ -11,6 +11,7 @@ local function setup(self)
 	go.set_scale(vmath.vector3(self.scale, 1.0, 1.0), "/slider")
 	go.set_position(vmath.vector3(76.0+128.0*self.scale, 220.0, 0.15),  "/slider")
 	self.state = 1
+	sound.play("/sounds#counter")
 end
 
 function init(self)
@@ -40,6 +41,7 @@ function update(self, dt)
 		else
 			self.state = 2
 			self.delay = 0.2
+			sound.stop("/sounds#counter")
 		end
 	elseif self.state == 2 then
 		self.delay = self.delay - dt
@@ -47,6 +49,7 @@ function update(self, dt)
 			if self.score >= 80 then
 				sprite.play_flipbook("#text", hash("target_met"))
 				self.delay = 2.5
+				sound.play("/sounds#success")
 			else
 				sprite.play_flipbook("#text", hash("game_over"))
 				self.delay = 3.5

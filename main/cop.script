@@ -22,11 +22,14 @@ local function setup(self)
 	msg.post("#right_baton", "disable")
 	self.baton_state = 0
 	msg.post(".", "acquire_input_focus")    -- acquiring input focus
+	self.running = false
 	self.active = true
 end
 
 function init(self)
 	self.active = false
+	sound.play("/sounds#footsteps")
+	sound.pause("/sounds#footsteps",true)
 end
 
 function final(self)
@@ -102,6 +105,13 @@ function update(self, dt)
 			sprite.play_flipbook("#body", body_animation)
 		end
 
+		if running and not self.running then
+			sound.pause("/sounds#footsteps", false)
+		elseif self.running and not running then
+			sound.pause("/sounds#footsteps", true)
+		end
+		self.running = running
+
 		if self.baton_state == 1 then
 			if self.hit_countdown < HIT_START then
 				self.baton_state = 2
@@ -155,6 +165,7 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("deactivate") then
 		self.active = false
 		msg.post(".", "release_input_focus")
+		sound.pause("/sounds#footsteps", true)
 	end
 end
 
@@ -170,6 +181,7 @@ function on_input(self, action_id, action)
 				self.baton_state = 3
 			end
 			sprite.play_flipbook("#body", self.body_animation)
+			sound.play("/sounds#swing")
 		end
 	elseif action_id == hash("up") then
 		self.v_dir = 1

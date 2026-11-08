@@ -45,6 +45,7 @@ function update(self, dt)
 			sprite.play_flipbook("#sprite", IDLE_ANIMATIONS[self.type])
 		elseif self.delay <= 0 then
 			sprite.play_flipbook("#sprite", WALK_ANIMATIONS[self.type])
+			sound.play("/sounds#takeoff")
 		end
 	else
 		self.pos.x = self.pos.x + dt * WALK_SPEED

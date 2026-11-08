@@ -28,5 +28,6 @@ function on_message(self, message_id, message, sender)
 		self.level = message.level
 		sprite.play_flipbook("#digit1", DIGIT_FRAMES[math.floor(self.level / 10) % 10 + 1])
 		sprite.play_flipbook("#digit2", DIGIT_FRAMES[self.level % 10 + 1])
+		sound.play("/sounds#level")
 	end
 end
